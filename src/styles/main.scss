@@ -1,7 +1,7 @@
-body{
-  font-family: "Syncopate", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  background-color: #005699;
-  color: #ffff;
-}
+@import './variables';
+@import './mixins';
+@import './base';
+@import './components/filters';
+@import './components/card';
+@import './components/navbar';
+@import './components/footer';
