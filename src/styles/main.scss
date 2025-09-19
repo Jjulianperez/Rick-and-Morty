@@ -1,7 +1,7 @@
 @import './variables';
 @import './mixins';
 @import './base';
-@import './components/filters';
-@import './components/card';
+@import '../components/filtro/filters.scss';
+@import '../components/card/card.scss';
 @import './components/navbar';
 @import './components/footer';
