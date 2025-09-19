@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Card } from '../components/card'
-import { Filtro } from '../components/filtro'
+import { Card } from '../components/card/Card'
+import { Filtro } from '../components/filtro/Filtro'
 import "../styles/main.scss"
 
 export const Route = createFileRoute('/')({
