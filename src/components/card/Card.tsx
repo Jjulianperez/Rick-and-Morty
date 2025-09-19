@@ -1,4 +1,4 @@
-import ImgCharacter from '../assets/cargando.png'
+import ImgCharacter from '../../assets/cargando.png'
 
 export const Card = ({isFav}) =>{
     return(
