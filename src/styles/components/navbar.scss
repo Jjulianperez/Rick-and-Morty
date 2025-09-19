@@ -1,0 +1,16 @@
+nav {
+  @include flex-center;
+  gap: 1.5rem;
+  padding: 1rem;
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+
+    &:hover {
+      color: #90caf9;
+    }
+  }
+}
