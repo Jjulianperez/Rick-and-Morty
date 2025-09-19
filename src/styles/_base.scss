@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body { 
+  font-family: $font-primary; 
+  background: linear-gradient(to bottom, $primary-color, $secondary-color); 
+  background-attachment: fixed; 
+  color: $text-color; }
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 300px;
+
+  .portalIcono img {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+  }
+
+  .tituloPrincipal img {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
