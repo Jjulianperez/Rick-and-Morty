@@ -1,8 +1,8 @@
 import ImgCharacter from '../../assets/cargando.png'
 
-export const Card = ({isFav}) =>{
+export const Card = ({className}) =>{
     return(
-        <article className={isFav}>
+        <article className={className}>
             <header className="imagen">
                 <img src={ImgCharacter} alt="" />
             </header>
