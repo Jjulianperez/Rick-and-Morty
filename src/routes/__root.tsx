@@ -1,6 +1,7 @@
 import { createRootRoute, Outlet, Link } from "@tanstack/react-router";
 import ImgTitulo from "../assets/tituloRickAndMorty.png";
 import ImgIcono from "../assets/Icono.png";
+
 import "../styles/main.scss";
 
 const RootRouteComponent = () => {
