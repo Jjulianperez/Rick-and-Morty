@@ -8,6 +8,7 @@
   flex-direction: row;
   gap: 1rem; 
   background: $card-gradient;
+  position: relative;
 
   &.fav {
     background: $card-gradient-fav;
@@ -90,3 +91,11 @@ button {
   margin: 2rem;
 }
 
+.fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}

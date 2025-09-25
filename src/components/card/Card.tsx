@@ -16,13 +16,14 @@ export const Card = ({ isFavorito, isCreate, ImgCharacter, name, status, firstSe
   const [isFav, setIsFav] = useState(isFavorito);
 
 
-let className = "character-card";
+// let className = "character-card";
   
-if (isFav && isCreate) className += " createAndFav";
+// if (isFav && isCreate) className += " createAndFav";
 
-else if (isFav) className += " fav";
+// else if (isFav) className += " fav";
 
-else if (isCreate) className += " create";
+// else if (isCreate) className += " create";
+const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${isFav && isCreate && "createAndFav"} `
 
   const handleFav = () => {
     console.log(`Este es el valor antes del click ${isFav}`)
@@ -35,6 +36,13 @@ else if (isCreate) className += " create";
   return (
     <article className={className}>
       <img src={ImgCharacter} alt={name} />
+
+      <span onClick={handleFav} className="fav-btn">
+
+        {isFav ? <AiFillHeart /> : <AiOutlineHeart />}
+
+      </span>
+
       <div className="infoPersonaje">
         <div>
           <p className="name">{name}</p>
@@ -44,7 +52,6 @@ else if (isCreate) className += " create";
         </div>
         <footer>
           <button>Ver Personaje</button>
-          <AiOutlineHeart onClick={handleFav}>Agregar favoritos</AiOutlineHeart>
         </footer>
       </div>
     </article>
