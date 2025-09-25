@@ -22,7 +22,7 @@ function RouteComponent() {
     <main>
       <Filtro/>
         <div className='cards-grid'>
-          <Card  isCreate={true} isFavorito={false}  ImgCharacter={ImgCharacter} name='JULIAN PEREZ' status='dead' firstSeen='EL PARAISO' lastSeen='aqui'/>
+          <Card  isCreate={true} isFavorito={true}  ImgCharacter={ImgCharacter} name='JULIAN PEREZ' status='dead' firstSeen='EL PARAISO' lastSeen='aqui'/>
 
           <Card  isCreate={true} isFavorito={false} ImgCharacter={ImgCharacter1} name='juan123' status='live'firstSeen='MI CASA' lastSeen='unknown' />
 
