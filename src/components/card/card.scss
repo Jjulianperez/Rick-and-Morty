@@ -1,6 +1,4 @@
-.character-card,
-.character-card-fav,
-.character-card-create {
+.character-card{
   border-radius: 16px;
   padding: 10px;
   width: 400px;
@@ -17,6 +15,9 @@
 
   &.create {
     background: $card-gradient-create;
+  }
+  &.createAndFav{
+    background: $card-gradient-createAndFav;
   }
 }
 
@@ -40,12 +41,19 @@ img {
     padding: 9px;
   }
 
-  .status {
+  .status{
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.2rem 0.6rem;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.15);
+    background: $status-color-alive;
+
+    &.dead{
+      background: $status-color-dead;
+    }
+    &.unknown{
+      background: $status-color-unknown;
+    }
   }
 
   .text {
@@ -64,13 +72,14 @@ button {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 12px;
-  background: #2196f3;
+  background: #00000096;
   color: #fff;
   cursor: pointer;
   transition: 0.3s;
+  font-family: $font-primary;
 
   &:hover {
-    background: #1769aa;
+    background: $primary-color;
   }
 }
 
