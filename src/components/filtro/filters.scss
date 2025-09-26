@@ -1,30 +1,56 @@
 .filters {
-  @include flex-center;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;   
+  grid-row-gap: 1rem;          
   margin: 2rem auto;
-  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;            
 
   .search {
     position: relative;
+    width: 100%;
 
     input {
+      font-family: $font-primary;
+      width: 100%;             
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: $text-color;
+      font-size: 1rem;
+    }
+
+    
+    &::after {
+      content: "🔍";
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: $text-color;
+      pointer-events: none;
+    }
+  }
+
+  .filters-selects {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    select {
+      flex: 1;
+      min-width: 100px;
       padding: 0.6rem 1rem;
       border-radius: 12px;
       border: none;
       outline: none;
-      width: 250px;
       background: rgba(255, 255, 255, 0.1);
       color: $text-color;
+      cursor: pointer;
     }
-  }
-
-  select {
-    padding: 0.6rem 1rem;
-    border-radius: 12px;
-    border: none;
-    outline: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: $text-color;
-    cursor: pointer;
   }
 }
