@@ -3,22 +3,39 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-body { 
+.body-index { 
   font-family: $font-primary; 
   background: linear-gradient(to bottom, $primary-color, $secondary-color); 
   background-attachment: fixed; 
-  color: $text-color; }
+  color: $text-color; 
+}
+
+.body-favoritos { 
+  font-family: $font-primary; 
+  background: linear-gradient(to bottom, #002C4E,#00A466); 
+  background-attachment: fixed; 
+  color: $text-color; 
+}
+.body-create { 
+  font-family: $font-primary; 
+  background: linear-gradient(to bottom, #002C4E,#ff0000); 
+  background-attachment: fixed; 
+  color: $text-color; 
+}
 
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
   align-items: center;
-  gap: 300px;
 
   .portalIcono img {
     max-width: 150px;
-    width: 100%;
     height: auto;
+  }
+
+  .tituloPrincipal {
+    display: flex;
+    justify-content: center;
   }
 
   .tituloPrincipal img {
