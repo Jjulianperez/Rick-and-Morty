@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
@@ -51,7 +52,7 @@ const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${is
           <p className="text">Visto por última vez en {lastSeen}</p>
         </div>
         <footer>
-          <button>Ver Personaje</button>
+          <button><Link to="/characters/$id" params ={{id: String(1)  }}>Ver Personaje</Link></button>
         </footer>
       </div>
     </article>
