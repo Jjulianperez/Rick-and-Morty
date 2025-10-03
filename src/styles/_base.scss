@@ -23,6 +23,13 @@
   color: $text-color; 
 }
 
+.body-character { 
+  font-family: $font-primary; 
+  background: linear-gradient(to bottom, #0d0221, #3a0ca3); 
+  background-attachment: fixed; 
+  color: $text-color; 
+}
+
 .header {
   display: grid;
   grid-template-columns: 150px 1fr 150px;
