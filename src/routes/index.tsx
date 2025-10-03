@@ -19,7 +19,7 @@ export const Route = createFileRoute('/')({
 
 function RouteComponent() {
   return (
-    <main>
+    <main className=''>
       <Filtro/>
         <div className='cards-grid'>
           <Card  isCreate={true} isFavorito={true}  ImgCharacter={ImgCharacter} name='JULIAN PEREZ' status='dead' firstSeen='EL PARAISO' lastSeen='aqui'/>
