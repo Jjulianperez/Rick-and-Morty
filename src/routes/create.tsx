@@ -8,8 +8,8 @@ export const Route = createFileRoute('/create')({
 
 function RouteComponent() {
   return (
-    <main>
+    
         <NewCharacterForm/>
-    </main>
+    
   )
 }

@@ -14,11 +14,12 @@ useEffect(() => {
   else if (location.pathname === "/favoritos") setBackgroundBody("body-favoritos");
   else if (location.pathname === "/create") setBackgroundBody("body-create");
   else if (location.pathname == "/characters/1") setBackgroundBody("body-character");
+  else if (location.pathname == "/edit$id") setBackgroundBody("body-edit");
   
 }, [location.pathname]);
 
   return (
-    <section className={backgroundBody}>
+    <section id="character" className={backgroundBody}>
       <header className="header">
         <div className="portalIcono">
           <img src={ImgIcono} alt="Rick And Morty Portal" />
