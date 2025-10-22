@@ -8,8 +8,9 @@ export const Route = createFileRoute('/characters/$id')({
 
 
 function RouteComponent() {
+  
   return (
-    <CharacterDetail name='Rick Sanches' image={ImgCharacter} species='Human' gender='Masculino' status='muerto' origin='Earth' location='Villa Mercedes' 
+    <CharacterDetail name='Rick Sanches' image={ImgCharacter} isFavorito={true} isCreate={true} species='Human' gender='Masculino' status='muerto' origin='Earth' location='Villa Mercedes' 
     episodes={[
       {
         id: 1,

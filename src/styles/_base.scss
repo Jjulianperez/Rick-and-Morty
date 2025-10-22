@@ -29,6 +29,19 @@
   background-attachment: fixed; 
   color: $text-color; 
 }
+.body-character-create { 
+  font-family: $font-primary; 
+  background: linear-gradient(to bottom, #000000, #c60000); 
+  background-attachment: fixed; 
+  color: $text-color; 
+}
+.body-edit{
+  font-family: $font-primary; 
+  background: linear-gradient(to bottom, #000000, #1000c6); 
+  background-attachment: fixed; 
+  color: $text-color;
+}
+
 
 .header {
   display: grid;
