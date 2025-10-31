@@ -7,7 +7,7 @@ export const Filtro = () =>{
         <input type="text" placeholder='Buscar Personaje' />
       </div>
 
-      <div className="filters-selects">
+      <section className="filters-selects">
         <Select name="status" id="status">
           <option value="live">Vivo</option>
           <option value="dead">Muerto</option>
@@ -25,7 +25,7 @@ export const Filtro = () =>{
           <option value="robot">Robot</option>
           <option value="parasite">Parásito</option>
         </Select>
-      </div>
+      </section>
     </article>
   )
 }
