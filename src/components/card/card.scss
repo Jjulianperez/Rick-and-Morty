@@ -49,7 +49,7 @@
     border-radius: 8px;
     background: $status-color-alive;
 
-    &.dead{
+    &.Dead{
       background: $status-color-dead;
     }
     &.unknown{

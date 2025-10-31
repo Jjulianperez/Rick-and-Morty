@@ -1,16 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { type CardProps } from "../../types/Character";
 
-type CardProps = {
-  isFavorito: boolean;
-  isCreate: boolean;
-  ImgCharacter: string;
-  name: string;
-  status: string;
-  firstSeen: string;
-  lastSeen: string;
-};
 
 export const Card = ({ isFavorito, isCreate, ImgCharacter, name, status, firstSeen, lastSeen,}: CardProps) => {
 
@@ -24,6 +16,8 @@ export const Card = ({ isFavorito, isCreate, ImgCharacter, name, status, firstSe
 // else if (isFav) className += " fav";
 
 // else if (isCreate) className += " create";
+
+
 const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${isFav && isCreate && "createAndFav"} `
 
   const handleFav = () => {
