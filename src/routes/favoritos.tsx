@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Card } from '../components/card/Card'
-import "../styles/main.scss"
+import "../scss/main.scss"
 
 export const Route = createFileRoute('/favoritos')({
   component: RouteComponent,

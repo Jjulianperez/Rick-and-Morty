@@ -2,7 +2,7 @@ import { createRootRoute, Outlet, Link, useRouterState } from "@tanstack/react-r
 import { useEffect, useState } from "react";
 import ImgTitulo from "../assets/tituloRickAndMorty.png";
 import ImgIcono from "../assets/Icono.png";
-import "../styles/main.scss";
+import "../scss/main.scss";
 
 const RootRouteComponent = () => {
   const { location } = useRouterState();
