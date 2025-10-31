@@ -15,20 +15,20 @@ function RouteComponent() {
       {
         id: 1,
         name: "The Ricklantis Mixup",
-        code: "S03E07",
-        airDate: "Septiembre 10, 2017",
+        episode: "S03E07",
+        air_date: "Septiembre 10, 2017",
       },
       {
         id: 2,
         name: "Close Rick-Counters of the Rick Kind",
-        code: "S01E10",
-        airDate: "Abril 7, 2014",
+        episode: "S01E10",
+        air_date: "Abril 7, 2014",
       },
       {
         id: 3,
         name: "Pilot",
-        code: "S01E01",
-        airDate: "Diciembre 2, 2013",
+        episode: "S01E01",
+        air_date: "Diciembre 2, 2013",
       },
     ]}/>
 )
