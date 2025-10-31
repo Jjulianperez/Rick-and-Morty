@@ -2,26 +2,8 @@ import { Link } from "@tanstack/react-router";
 import React, { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
+import { type CharacterDetallesProps } from '../../types/Character'
 
-interface Episode {
-  id: number;
-  name: string;
-  code: string;
-  airDate: string;
-}
-
-interface CharacterDetallesProps {
-  image: string;
-  name: string;
-  species: string;
-  status: string;
-  gender: string;
-  origin: string;
-  location: string;
-  isFavorito: boolean;
-  isCreate: boolean;
-  episodes: Episode[];
-}
 
 export const CharacterDetail: React.FC<CharacterDetallesProps> = ({
   image,
@@ -130,8 +112,8 @@ export const CharacterDetail: React.FC<CharacterDetallesProps> = ({
                   <div key={ep.id} className="episode-card">
                     <strong><h4>{ep.name}</h4></strong>
                     <br />
-                    <p>{ep.code}</p>
-                    <p>{ep.airDate}</p>
+                    <p>{ep.episode}</p>
+                    <p>{ep.air_date}</p>
                   </div>
                 ))}
               </div>
