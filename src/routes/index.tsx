@@ -1,39 +1,54 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Card } from '../components/card/Card'
-import { Filtro } from '../components/filtro/Filtro'
-import "../styles/main.scss"
+import { createFileRoute } from "@tanstack/react-router";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Card } from "../components/card/Card";
+import { useFetchCharacters } from "../hook/useFetchCharacters";
+import { useCharacterStore } from "../stores/charactersStore";
+import { Filtro } from "../components/filtro/Filtro";
+import "../scss/main.scss";
 
-
-//-----------fotos de prueba xd---------------
-import ImgCharacter from '../assets/cargando.png'
-import ImgCharacter1 from '../assets/1.jpeg'
-import ImgCharacter2 from '../assets/2.jpeg'
-import ImgCharacter3 from '../assets/3.jpeg'
-import ImgCharacter4 from '../assets/4.jpeg'
-import ImgCharacter5 from '../assets/5.jpeg'
-// ------------------------------------------
-
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
+  const { error } = useFetchCharacters();
+  const { characters, incrementPage, info } = useCharacterStore();
+
+  if (error) {
+    return <p>Error al cargar los personajes</p>;
+  }
+
   return (
-    <main className=''>
-      <Filtro/>
-        <div className='cards-grid'>
-          <Card  isCreate={true} isFavorito={true}  ImgCharacter={ImgCharacter} name='JULIAN PEREZ' status='dead' firstSeen='EL PARAISO' lastSeen='aqui'/>
+    <main>
+      <Filtro />
 
-          <Card  isCreate={true} isFavorito={false} ImgCharacter={ImgCharacter1} name='juan123' status='live'firstSeen='MI CASA' lastSeen='unknown' />
-
-          <Card  isCreate={false} isFavorito={false} ImgCharacter={ImgCharacter2} name='belu' status='live' firstSeen='el primero' lastSeen='en el ultimo' />
-
-          <Card  isCreate={false} isFavorito={true} ImgCharacter={ImgCharacter3} name='carlos' status='unknown' firstSeen='el 15' lastSeen='ultimo episodio' />
-
-          <Card  isCreate={false} isFavorito={false} ImgCharacter={ImgCharacter4} name='Juli' status='dead' firstSeen='en el segundo' lastSeen='penultimo' />
-
-          <Card  isCreate={true} isFavorito={false} ImgCharacter={ImgCharacter5} name='elsebas' status='live' firstSeen='en el primero'lastSeen='en el ultimo' />
+      <InfiniteScroll
+        dataLength={characters.length}
+        next={() => setTimeout(() => incrementPage(), 3500)}
+        hasMore={!!info.next}
+        loader={<h4 style={{ textAlign: "center" }}>Cargando más personajes...</h4>}
+        endMessage={<p style={{ textAlign: "center" }}>¡Has visto todos!</p>}
+        style={{ overflow: "visible" }}
+      >
+        <div className="cards-grid">
+          {characters.length === 0 ? (
+            <p>No se encontraron personajes.</p>
+          ) : (
+            characters.map((character) => (
+              <Card
+                key={character.id}
+                name={character.name}
+                ImgCharacter={character.image}
+                status={character.status}
+                lastSeen={character.lastSeen ?? "Desconocido"}
+                firstSeen={character.firstSeen ?? "Desconocido"}
+                isCreate={character.isCreate ?? false}
+                isFavorito={character.isFavorito ?? false}
+              />
+            ))
+          )}
         </div>
+      </InfiniteScroll>
     </main>
-  )
+  );
 }
