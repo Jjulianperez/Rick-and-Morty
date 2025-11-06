@@ -39,7 +39,7 @@ export interface CharacterDetallesProps {
   location: string;
   isFavorito: boolean;
   isCreate: boolean;
-  episodes: Episode[];
+  name: Episode[];
 }
 
 export interface CardProps {
@@ -64,3 +64,13 @@ export interface CharacterResponse {
   info: Info;
   results: ExtendedCharacter[];
 }
+
+
+export interface CharactersParams {
+  page?: number,
+  status?: string,
+  species?: string,
+  type?: string
+  name?: string,
+  gender?: string
+} 

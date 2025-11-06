@@ -4,10 +4,10 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
 export const useFetchCharacters = () =>{
-    const { set, page, characters } = useCharacterStore()
+    const { set, page, characters, status, species, type, name, gender } = useCharacterStore()
     const query = useQuery({
-        queryKey: ['characters',page],
-        queryFn: () => ApiService.getCharacters(page)
+        queryKey: ['characters',page,status,species, type, name, gender],
+        queryFn: () => ApiService.getCharacters({status, page, species, type, name, gender})
     })
 
     useEffect (()=>{
