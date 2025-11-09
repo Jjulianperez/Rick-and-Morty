@@ -18,7 +18,7 @@ export interface Character {
   location: {
     name: string;
   };
-  episode: string[];
+  episode: Episode[];
 }
 
 export interface ExtendedCharacter extends Character {
@@ -39,11 +39,12 @@ export interface CharacterDetallesProps {
   location: string;
   isFavorito: boolean;
   isCreate: boolean;
-  name: Episode[];
+  episodes: Episode[];
 }
 
 export interface CardProps {
   isFavorito: boolean;
+  id: number,
   isCreate: boolean;
   ImgCharacter: string;
   name: string;

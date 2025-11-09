@@ -24,7 +24,7 @@ function RouteComponent() {
 
       <InfiniteScroll
         dataLength={characters.length}
-        next={() => setTimeout(() => incrementPage(), 3500)}
+        next={() => (incrementPage())}
         hasMore={!!info.next}
         loader={<h4 style={{ textAlign: "center" }}>Cargando más personajes...</h4>}
         endMessage={<p style={{ textAlign: "center" }}>¡Has visto todos!</p>}
@@ -37,6 +37,7 @@ function RouteComponent() {
             characters.map((character) => (
               <Card
                 key={character.id}
+                id={character.id}
                 name={character.name}
                 ImgCharacter={character.image}
                 status={character.status}
