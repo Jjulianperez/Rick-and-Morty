@@ -35,10 +35,10 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
   ...initialState,
   set: (newState)=> set(newState),
   incrementPage:()=>{
-    const current = get().page
-    set({
-      page: current +1
-    })
+    //const current = get().page
+    set((prev)=>({
+      page: prev.page +1
+    }))
   },
   clearCharacters:()=>{
     set({

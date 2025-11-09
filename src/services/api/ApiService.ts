@@ -1,5 +1,5 @@
 import { axiosInstance } from "./axiosInstance";
-import type { ExtendedCharacter,Info, CharactersParams } from "../../types/Character";
+import type { ExtendedCharacter,Info, CharactersParams} from "../../types/Character";
 
 interface CharactersResponse {
   info: Info;
@@ -14,7 +14,11 @@ const getCharacters = async (params: CharactersParams = {}): Promise<CharactersR
   return await axiosInstance.get(`/character`, { params: cleanParams });
 };
 
+const getSingleCharacter = async (id: string) =>{
+  return await axiosInstance.get(`/character/ ${id}`)
+}
 
 export const ApiService = {
-  getCharacters
+  getCharacters,
+  getSingleCharacter
 };
