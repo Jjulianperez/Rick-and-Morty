@@ -4,21 +4,19 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { type CardProps } from "../../types/Character";
 
 
-export const Card = ({ isFavorito, isCreate, ImgCharacter, name, status, firstSeen, lastSeen,}: CardProps) => {
+export const Card = ({ 
+  isFavorito, 
+  isCreate, 
+  ImgCharacter, 
+  name, 
+  status, 
+  firstSeen, 
+  lastSeen,
+  id
+}: CardProps) => {
 
   const [isFav, setIsFav] = useState(isFavorito);
-
-
-// let className = "character-card";
-  
-// if (isFav && isCreate) className += " createAndFav";
-
-// else if (isFav) className += " fav";
-
-// else if (isCreate) className += " create";
-
-
-const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${isFav && isCreate && "createAndFav"} `
+  const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${isFav && isCreate && "createAndFav"} `
 
   const handleFav = () => {
     console.log(`Este es el valor antes del click ${isFav}`)
@@ -46,7 +44,7 @@ const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${is
           <p className="text">Visto por última vez en {lastSeen}</p>
         </div>
         <footer>
-          <button><Link to="/characters/$id" params ={{id: String(1)  }}>Ver Personaje</Link></button>
+          <button><Link to="/characters/$id" params ={{id: String(id)  }}>Ver Personaje</Link></button>
         </footer>
       </div>
     </article>
