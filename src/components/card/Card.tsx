@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { type CardProps } from "../../types/Character";
+import { useSingleCharacterStore } from "../../stores/characterSingleStore";
 
 
 export const Card = ({ 
@@ -16,6 +17,8 @@ export const Card = ({
 }: CardProps) => {
 
   const [isFav, setIsFav] = useState(isFavorito);
+  const { clearCharacters } = useSingleCharacterStore();
+
   const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${isFav && isCreate && "createAndFav"} `
 
   const handleFav = () => {
@@ -44,7 +47,7 @@ export const Card = ({
           <p className="text">Visto por última vez en {lastSeen}</p>
         </div>
         <footer>
-          <button><Link to="/characters/$id" params ={{id: String(id)  }}>Ver Personaje</Link></button>
+          <button onClick={()=>clearCharacters()}><Link to="/characters/$id" params ={{id: String(id)  }}>Ver Personaje</Link></button>
         </footer>
       </div>
     </article>
