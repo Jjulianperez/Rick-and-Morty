@@ -5,21 +5,20 @@ interface CharacterState {
   characters: ExtendedCharacter[];
   info: Info;
   page: number;
-  incrementPage: ()=> void
-  clearCharacters: ()=> void
-  set: (state:Partial<CharacterState>) => void;
-  name: string | undefined,
-  status: string | undefined,
-  species: string | undefined,
-  episode: string | undefined,
-  type: string | undefined,
-  gender: string | undefined
+  name?: string;
+  status?: string;
+  species?: string;
+  episode?: string;
+  type?: string;
+  gender?: string;
+  set: (state: Partial<CharacterState>) => void;
+  incrementPage: () => void;
+  clearCharacters: () => void;
 }
 
-
-const initialState: Omit<CharacterState, "set"> = {
+const initialState: Omit<CharacterState, "set" | "setLoading" | "incrementPage" | "clearCharacters"> = {
   characters: [],
-  info: {}, 
+  info: {},
   page: 1,
   species: undefined,
   name: undefined,
@@ -27,23 +26,22 @@ const initialState: Omit<CharacterState, "set"> = {
   episode: undefined,
   type: undefined,
   gender: undefined,
-  incrementPage: ()=>{},
-  clearCharacters: ()=>{}
 };
 
 export const useCharacterStore = create<CharacterState>((set, get) => ({
   ...initialState,
-  set: (newState)=> set(newState),
-  incrementPage:()=>{
-    //const current = get().page
-    set((prev)=>({
-      page: prev.page +1
-    }))
+
+  set: (newState) => set(newState),
+
+  incrementPage: () => {
+    const current = get().page;
+    set({ page: current + 1 });
   },
-  clearCharacters:()=>{
+
+  clearCharacters: () => {
     set({
       characters: [],
-      page: 1
-    })
-  }
-  }));
+      page: 1,
+    });
+  },
+}));
