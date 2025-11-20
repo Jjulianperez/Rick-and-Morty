@@ -74,8 +74,14 @@
           color: #00ffcc;
         }
 
-        &.dead {
+        &.Dead {
           color: red;
+        }
+        &.Alive {
+          color: #00ffcc;
+        }
+        &.unknown {
+          color: #4b4b4b;
         }
         .fav-btn {
           position: absolute;
