@@ -24,9 +24,8 @@ function RouteComponent() {
 
       <InfiniteScroll
         dataLength={characters.length}
-        next={() => (incrementPage())}
+        next={setTimeout(incrementPage,3000)}
         hasMore={!!info.next}
-        loader={<h4 style={{ textAlign: "center" }}>Cargando más personajes...</h4>}
         endMessage={<p style={{ textAlign: "center" }}>¡Has visto todos!</p>}
         style={{ overflow: "visible" }}
       >
