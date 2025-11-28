@@ -7,18 +7,18 @@ export interface Episode {
 
 export interface Character {
   id: number;
-  name: string;
-  image: string;
-  species: string;
-  status: string;
-  gender: string;
-  origin: {
+  name?: string;
+  image?: string;
+  species?: string;
+  status?: string;
+  gender?: string;
+  origin?: {
     name: string;
   };
-  location: {
+  location?: {
     name: string;
   };
-  episode: Episode[];
+  episode?: Episode[];
 }
 
 export interface ExtendedCharacter extends Character {
@@ -75,3 +75,30 @@ export interface CharactersParams {
   name?: string,
   gender?: string
 } 
+
+
+
+// tipos para el formulario y el personaje creado
+
+export interface NewCharacter {
+  name: string;
+  gender: string;
+  status: string;
+  species: string;
+  origin: {
+    name: string;
+  };
+  image?: File;
+  type?: string;
+}
+
+export interface FormCharacter {
+  nombre: string;
+  genero: string;
+  estado: string;
+  especie: string;
+  tipo: string;
+  origen: string;
+  imagen?: File;
+}
+

@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 
 function RouteComponent() {
   const { error } = useFetchCharacters();
-  const { characters, incrementPage, info } = useCharacterStore();
+  const { characters, incrementPage, info, source } = useCharacterStore();
 
   if (error) {
     return <p>Error al cargar los personajes</p>;
@@ -24,11 +24,12 @@ function RouteComponent() {
 
       <InfiniteScroll
         dataLength={characters.length}
-        next={setTimeout(incrementPage,3000)}
-        hasMore={!!info.next}
+        next={incrementPage}
+        loader={<h4 style={{ textAlign: "center" }}>Cargando más personajes...</h4>}
+        hasMore={source === "api" ? !!info.next : false}
         endMessage={<p style={{ textAlign: "center" }}>¡Has visto todos!</p>}
         style={{ overflow: "visible" }}
-      >
+      > 
         <div className="cards-grid">
           {characters.length === 0 ? (
             <p>No se encontraron personajes.</p>

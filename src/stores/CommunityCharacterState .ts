@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { ExtendedCharacter, Info } from "../types/Character";
 
-interface CharacterState {
+interface CommunityCharacterState {
   characters: ExtendedCharacter[];
   info: Info;
   page: number;
@@ -11,13 +11,12 @@ interface CharacterState {
   episode?: string;
   type?: string;
   gender?: string;
-  source: "api" | "local";
-  set: (state: Partial<CharacterState>) => void;
+  set: (state: Partial<CommunityCharacterState>) => void;
   incrementPage: () => void;
   clearCharacters: () => void;
 }
 
-const initialState: Omit<CharacterState, "set" | "setLoading" | "incrementPage" | "clearCharacters"> = {
+const initialCommunityState: Omit<CommunityCharacterState, "set" | "incrementPage" | "clearCharacters"> = {
   characters: [],
   info: {},
   page: 1,
@@ -26,12 +25,11 @@ const initialState: Omit<CharacterState, "set" | "setLoading" | "incrementPage" 
   status: undefined,
   episode: undefined,
   type: undefined,
-  gender: undefined,
-  source: 'api'
+  gender: undefined
 };
 
-export const useCharacterStore = create<CharacterState>((set, get) => ({
-  ...initialState,
+export const useCommunityCharacterStore = create<CommunityCharacterState>((set, get) => ({
+  ...initialCommunityState,
 
   set: (newState) => set(newState),
 

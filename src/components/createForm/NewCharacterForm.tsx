@@ -2,10 +2,13 @@ import { Formik, Form, Field } from "formik";
 import { useState } from "react";
 import imgIcono from "../../assets/cargando.png";
 import "./newCharacterForm.scss";
+import type{ FormCharacter, NewCharacter } from "../../types/Character";
+import { useCreateCharacter } from "../../hook/useCreateCharacter";
 
 
 export const NewCharacterForm = () => {
   const [prevista, setPrevista] = useState(imgIcono);
+  const mutation = useCreateCharacter()
 
   const handleImageChange = (e, setFieldValue) => {
     const file = e.target.files[0];
@@ -16,6 +19,21 @@ export const NewCharacterForm = () => {
       reader.readAsDataURL(file);
     }
   };
+  
+  const handleSubmit = (values: FormCharacter) => {
+  const newCharacter: NewCharacter = {
+    name: values.nombre,
+    gender: values.genero,
+    status: values.estado,
+    species: values.especie,
+    origin: { name: values.origen },
+    image: imgIcono,
+    type: values.tipo,
+  };
+
+  mutation.mutate(newCharacter);
+};
+
 
   return (
     <section className="contenedor-form">
@@ -33,7 +51,7 @@ export const NewCharacterForm = () => {
           <h2>Nuevo personaje</h2>
           <p>Llena los campos y crea tu propio personaje</p>
 
-          <Formik
+          <Formik<FormCharacter>
             initialValues={{
               nombre: "",
               genero: "",
@@ -41,12 +59,9 @@ export const NewCharacterForm = () => {
               especie: "",
               tipo: "",
               origen: "",
-              imagen: null,
+              image: imgIcono,
             }}
-            onSubmit={(values) => {
-              console.log(values);
-              alert("Personaje creado con éxito");
-            }}
+            onSubmit={handleSubmit}
           >
             {({ isSubmitting, setFieldValue }) => (
               <Form className="character-form">
@@ -98,7 +113,7 @@ export const NewCharacterForm = () => {
                   </Field>
                 </div>
 
-                <button type="submit" disabled={isSubmitting}>
+                <button disabled={isSubmitting}>
                   Crear
                 </button>
               </Form>
