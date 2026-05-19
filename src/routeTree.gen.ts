@@ -10,19 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
-import { Route as EditidRouteImport } from './routes/edit$id'
 import { Route as CreateRouteImport } from './routes/create'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EditIdRouteImport } from './routes/edit/$id'
 import { Route as CharactersIdRouteImport } from './routes/characters.$id'
 
 const FavoritosRoute = FavoritosRouteImport.update({
   id: '/favoritos',
   path: '/favoritos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EditidRoute = EditidRouteImport.update({
-  id: '/edit$id',
-  path: '/edit$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreateRoute = CreateRouteImport.update({
@@ -35,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EditIdRoute = EditIdRouteImport.update({
+  id: '/edit/$id',
+  path: '/edit/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CharactersIdRoute = CharactersIdRouteImport.update({
   id: '/characters/$id',
   path: '/characters/$id',
@@ -44,45 +44,45 @@ const CharactersIdRoute = CharactersIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/create': typeof CreateRoute
-  '/edit$id': typeof EditidRoute
   '/favoritos': typeof FavoritosRoute
   '/characters/$id': typeof CharactersIdRoute
+  '/edit/$id': typeof EditIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/create': typeof CreateRoute
-  '/edit$id': typeof EditidRoute
   '/favoritos': typeof FavoritosRoute
   '/characters/$id': typeof CharactersIdRoute
+  '/edit/$id': typeof EditIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/create': typeof CreateRoute
-  '/edit$id': typeof EditidRoute
   '/favoritos': typeof FavoritosRoute
   '/characters/$id': typeof CharactersIdRoute
+  '/edit/$id': typeof EditIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/create' | '/edit$id' | '/favoritos' | '/characters/$id'
+  fullPaths: '/' | '/create' | '/favoritos' | '/characters/$id' | '/edit/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/create' | '/edit$id' | '/favoritos' | '/characters/$id'
+  to: '/' | '/create' | '/favoritos' | '/characters/$id' | '/edit/$id'
   id:
     | '__root__'
     | '/'
     | '/create'
-    | '/edit$id'
     | '/favoritos'
     | '/characters/$id'
+    | '/edit/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CreateRoute: typeof CreateRoute
-  EditidRoute: typeof EditidRoute
   FavoritosRoute: typeof FavoritosRoute
   CharactersIdRoute: typeof CharactersIdRoute
+  EditIdRoute: typeof EditIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,13 +92,6 @@ declare module '@tanstack/react-router' {
       path: '/favoritos'
       fullPath: '/favoritos'
       preLoaderRoute: typeof FavoritosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/edit$id': {
-      id: '/edit$id'
-      path: '/edit$id'
-      fullPath: '/edit$id'
-      preLoaderRoute: typeof EditidRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/create': {
@@ -115,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/edit/$id': {
+      id: '/edit/$id'
+      path: '/edit/$id'
+      fullPath: '/edit/$id'
+      preLoaderRoute: typeof EditIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/characters/$id': {
       id: '/characters/$id'
       path: '/characters/$id'
@@ -128,9 +128,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CreateRoute: CreateRoute,
-  EditidRoute: EditidRoute,
   FavoritosRoute: FavoritosRoute,
   CharactersIdRoute: CharactersIdRoute,
+  EditIdRoute: EditIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
