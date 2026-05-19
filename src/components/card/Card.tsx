@@ -1,44 +1,55 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { type CardProps } from "../../types/Character";
-import { useSingleCharacterStore } from "../../stores/characterSingleStore";
 import ImgenDeRespaldo from '../../assets/cargando.png'
 import { useDeleteCharacter } from "../../hook/useCreateCharacter";
+import { useFavoritosStore } from "../../stores/favoritosStore";
+import { useToastStore } from "../../stores/toastStore";
+import type { CardProps } from "../../types/Character";
 
-export const Card = ({ 
-  isFavorito, 
-  isCreate, 
-  ImgCharacter, 
-  name, 
-  status, 
-  firstSeen, 
+export const Card = ({
+  isCreate,
+  ImgCharacter,
+  name,
+  status,
+  firstSeen,
   lastSeen,
   id
 }: CardProps) => {
 
-  const [isFav, setIsFav] = useState(isFavorito);
-  const { clearCharacters } = useSingleCharacterStore();
-
-  // ⬅ Aca va el hook, UNA sola vez:
+  const { isFav, toggleFav } = useFavoritosStore();
+  const esFavorito = isFav(id);
   const { mutate: deleteCharacter } = useDeleteCharacter();
+  const { addToast } = useToastStore();
 
-  const className = `character-card ${isFav && "fav"} ${isCreate && "create"} ${isFav && isCreate && "createAndFav"} `;
+  const className = `character-card ${esFavorito && "fav"} ${isCreate && "create"} ${esFavorito && isCreate && "createAndFav"} `;
 
   const handleFav = () => {
-    setIsFav(!isFav)
+    toggleFav({
+      id,
+      name,
+      image: ImgCharacter,
+      status,
+      firstSeen,
+      lastSeen,
+      isCreate,
+    });
+  };
+
+  const handleDelete = () => {
+    if (window.confirm(`¿Eliminar a "${name}"?`)) {
+      deleteCharacter(id, {
+        onSuccess: () => addToast("Personaje eliminado", "success"),
+        onError: () => addToast("Error al eliminar", "error"),
+      });
+    }
   };
 
   return (
     <article className={className}>
-      {
-        ImgCharacter===null 
-          ? <img src={ImgenDeRespaldo} alt={name}/>
-          : <img src={ImgCharacter} alt={name}/>
-      }
+      <img src={ImgCharacter ?? ImgenDeRespaldo} alt={name} />
 
       <span onClick={handleFav} className="fav-btn">
-        {isFav ? <AiFillHeart /> : <AiOutlineHeart />}
+        {esFavorito ? <AiFillHeart /> : <AiOutlineHeart />}
       </span>
 
       <div className="infoPersonaje">
@@ -49,14 +60,12 @@ export const Card = ({
           <p className="text">Visto por última vez en {lastSeen}</p>
         </div>
         <footer>
-          <button onClick={() => clearCharacters()}>
-            <Link to="/characters/$id" params={{ id: String(id) }}>
-              Ver Personaje
-            </Link>
-          </button>
+          <Link to="/characters/$id" params={{ id: String(id) }}>
+            <button>Ver Personaje</button>
+          </Link>
 
           {isCreate && (
-            <button onClick={() => deleteCharacter(id)}>
+            <button onClick={handleDelete}>
               Eliminar Personaje
             </button>
           )}

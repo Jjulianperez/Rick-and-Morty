@@ -1,4 +1,4 @@
-.character-card{
+.character-card {
   border-radius: 16px;
   padding: 10px;
   width: 400px;
@@ -9,17 +9,66 @@
   gap: 1rem; 
   background: $card-gradient;
   position: relative;
+  animation: fadeInUp 0.5s ease backwards;
+  transition: all 0.3s ease;
+  cursor: default;
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 200, 0.15);
+  }
 
   &.fav {
     background: $card-gradient-fav;
+
+    &:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 164, 102, 0.3);
+    }
   }
 
   &.create {
     background: $card-gradient-create;
+
+    &:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.2);
+    }
   }
-  &.createAndFav{
+
+  &.createAndFav {
     background: $card-gradient-createAndFav;
+
+    &:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.2);
+    }
   }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem;
+
+  .character-card:nth-child(1) { animation-delay: 0.05s; }
+  .character-card:nth-child(2) { animation-delay: 0.1s; }
+  .character-card:nth-child(3) { animation-delay: 0.15s; }
+  .character-card:nth-child(4) { animation-delay: 0.2s; }
+  .character-card:nth-child(5) { animation-delay: 0.25s; }
+  .character-card:nth-child(6) { animation-delay: 0.3s; }
+  .character-card:nth-child(7) { animation-delay: 0.35s; }
+  .character-card:nth-child(8) { animation-delay: 0.4s; }
+  .character-card:nth-child(9) { animation-delay: 0.45s; }
+  .character-card:nth-child(10) { animation-delay: 0.5s; }
+  .character-card:nth-child(11) { animation-delay: 0.55s; }
+  .character-card:nth-child(12) { animation-delay: 0.6s; }
+  .character-card:nth-child(13) { animation-delay: 0.65s; }
+  .character-card:nth-child(14) { animation-delay: 0.7s; }
+  .character-card:nth-child(15) { animation-delay: 0.75s; }
+  .character-card:nth-child(16) { animation-delay: 0.8s; }
+  .character-card:nth-child(17) { animation-delay: 0.85s; }
+  .character-card:nth-child(18) { animation-delay: 0.9s; }
+  .character-card:nth-child(19) { animation-delay: 0.95s; }
+  .character-card:nth-child(20) { animation-delay: 1s; }
 }
 
 .character-card img {
@@ -27,7 +76,12 @@
   height: 120px;
   margin-top: 15px;
   border-radius: 12px;
-  object-fit: cover; 
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.character-card:hover img {
+  transform: scale(1.05);
 }
 
 .infoPersonaje {
@@ -42,17 +96,25 @@
     padding: 9px;
   }
 
-  .status{
+  .status {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.2rem 0.6rem;
     border-radius: 8px;
     background: $status-color-alive;
+    display: inline-block;
+    position: relative;
 
-    &.Dead{
-      background: $status-color-dead;
+    &.alive {
+      animation: statusPulse 2s ease-in-out infinite;
     }
-    &.unknown{
+
+    &.Dead, &.dead {
+      background: $status-color-dead;
+      animation: statusPulseDead 2s ease-in-out infinite;
+    }
+
+    &.unknown {
       background: $status-color-unknown;
     }
   }
@@ -65,36 +127,37 @@
 
   footer {
     margin-top: auto;
+
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 12px;
+      background: #00000096;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: $font-primary;
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        background: $secondary-color;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(42, 101, 147, 0.4);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
   }
 }
 
-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 12px;
-  background: #00000096;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: $font-primary;
-  
-
-  &:hover {
-    background: $secondary-color;
-    color: white;
-  }
-}
-
-a{
+a {
   text-decoration: none;
   color: #ffff;
-}
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 2rem;
 }
 
 .fav-btn {
@@ -104,4 +167,14 @@ a{
   font-size: 24px;
   cursor: pointer;
   color: white;
+  transition: all 0.3s ease;
+  z-index: 2;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &:active svg {
+    animation: heartBeat 0.5s ease;
+  }
 }
