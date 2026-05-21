@@ -1,4 +1,4 @@
-.character-detail-div{
+.character-detail-div {
   width: 100%;
   min-height: calc(100vh - 150px);
   padding: 2rem;
@@ -6,51 +6,66 @@
   flex-direction: column;
   gap: 2rem;
   color: #fff;
+  animation: fadeInUp 0.6s ease;
+
   .character-actions-top {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    animation: fadeInDown 0.5s ease;
 
-  .btn-edit,
-  .btn-delete {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+    .btn-edit,
+    .btn-delete {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-  .btn-edit {
-    background: #7209b7;
-    color: #fff;
+    .btn-edit {
+      background: #7209b7;
+      color: #fff;
 
-    &:hover {
-      background: #776dff;
+      &:hover {
+        background: #776dff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(114, 9, 183, 0.4);
+      }
+    }
+
+    .btn-delete {
+      background: #db0000;
+      color: #fff;
+
+      &:hover {
+        background: #ff4d6d;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(219, 0, 0, 0.4);
+      }
     }
   }
-
-  .btn-delete {
-    background: #db0000;
-    color: #fff;
-
-    &:hover {
-      background: #ff4d6d;
-    }
-  }
-}
 
   .character-header {
     display: grid;
     grid-template-columns: 250px 1fr;
     gap: 2rem;
     align-items: stretch;
+    animation: fadeInUp 0.6s ease 0.2s backwards;
 
     .character-image {
       width: 100%;
       border-radius: 10px;
       object-fit: cover;
+      transition: all 0.5s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 30px rgba(0, 255, 200, 0.2);
+      }
     }
 
     .character-info {
@@ -63,6 +78,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem 1rem;
+      animation: borderGlow 3s ease-in-out infinite;
+      transition: all 0.3s ease;
 
       p {
         margin: 0.5rem;
@@ -77,12 +94,15 @@
         &.Dead {
           color: red;
         }
+
         &.Alive {
           color: #00ffcc;
         }
+
         &.unknown {
           color: #4b4b4b;
         }
+
         .fav-btn {
           position: absolute;
           top: 10px;
@@ -97,6 +117,10 @@
             color: #ff4d6d;
           }
 
+          &:active svg {
+            animation: heartBeat 0.5s ease;
+          }
+
           svg {
             fill: currentColor;
           }
@@ -104,6 +128,7 @@
       }
     }
   }
+
   .character-details {
     background-color: rgba(0, 0, 0, 0.479);
     padding: 35px;
@@ -111,6 +136,7 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    animation: fadeInUp 0.6s ease 0.4s backwards;
 
     .character-tabs {
       display: flex;
@@ -124,73 +150,283 @@
         border-radius: 5px;
         color: #fff;
         cursor: pointer;
-        transition: background 0.3s;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: #00ffcc;
+          transform: scaleX(0);
+          transition: transform 0.3s ease;
+        }
 
         &:hover {
           background: #4a4ae0;
+          transform: translateY(-2px);
         }
 
         &.active {
           background: #7209b7;
+
+          &::after {
+            transform: scaleX(1);
+          }
         }
       }
     }
 
     .character-content {
       flex: 2;
-      gap: 1px;
-      strong{
-            color: #00ffcc;
-          }
+      animation: fadeIn 0.4s ease;
 
-      .episodes-list {
-        display: flex;
-        justify-content: center;
-        gap: 1.70rem;
-        padding: 1rem;
-
-        .episode-card {
-          height: 200px;
-          background: hsla(272, 100%, 63%, 0.221);
-          padding: 2rem;
-          border-radius: 10px;
-          width: 350px;
-          text-align: center;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-
-          h4 {
-            font-size:  1.20rem;
-            margin-bottom: 0.7rem;
-            color: rgb(255, 255, 255);
-          }
-
-          p {
-            text-align: left;
-            margin: 0.3rem 0;
-            font-size: 1.20rem;
-            color: #ffffff67;
-          }
-        }
+      strong {
+        color: #00ffcc;
       }
     }
+  }
+}
 
-    .character-actions {
-      display: flex;
-      justify-content: center;
+// --- EPISODES SECTION (rediseñado) ---
+
+.episodes-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 260px;
+}
+
+.episodes-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.episode-nav-btn {
+  background: rgba(0, 255, 204, 0.1) !important;
+  border: 1px solid rgba(0, 255, 204, 0.3) !important;
+  color: #00ffcc !important;
+  width: 48px;
+  height: 48px;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    background: rgba(0, 255, 204, 0.25) !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+.episodes-list {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex: 1;
+  max-width: 100%;
+}
+
+.episode-card {
+  background: rgba(114, 9, 183, 0.15);
+  border: 1px solid rgba(114, 9, 183, 0.3);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 260px;
+  min-height: 180px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.4s ease backwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(114, 9, 183, 0.4);
+    background: rgba(114, 9, 183, 0.25);
+    border-color: rgba(114, 9, 183, 0.5);
+  }
+
+  &.skeleton {
+    animation: skeletonPulse 1.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .episode-badge {
+    display: inline-block;
+    background: rgba(0, 255, 204, 0.15);
+    color: #00ffcc;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .episode-date {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+  }
+}
+
+.episodes-pagination {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 1px;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.episodes-loading {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+
+  .episode-card.skeleton {
+    height: 160px;
+    min-height: unset;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: transparent;
+  }
+}
+
+.episodes-empty {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  padding: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .character-detail-div {
+    padding: 1.5rem;
+  }
+
+  .character-header {
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+  }
+
+  .episode-card {
+    width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .character-detail-div {
+    padding: 1rem;
+  }
+
+  .character-header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+
+    .character-image {
+      max-width: 250px;
+    }
+
+    .character-info {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+  }
+
+  .character-details {
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+
+    .character-tabs {
+      gap: 0.8rem;
 
       button {
-        background: transparent;
-        border: none;
-        font-size: 2rem;
-        color: #00ffcc;
-        cursor: pointer;
-        transition: transform 0.2s;
-
-        &:hover {
-          transform: scale(1.1);
-          color: #4a4ae0;
-        }
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
       }
     }
+  }
+
+  .episodes-carousel {
+    gap: 0.5rem;
+  }
+
+  .episodes-list {
+    gap: 0.8rem;
+  }
+
+  .episode-card {
+    width: 180px;
+    min-height: 140px;
+    padding: 1rem;
+
+    h4 {
+      font-size: 0.85rem;
+    }
+  }
+
+  .episode-nav-btn {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .character-detail-div {
+    padding: 0.8rem;
+  }
+
+  .character-details {
+    padding: 1rem !important;
+  }
+
+  .episodes-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .episode-card {
+    width: 100%;
+    max-width: 280px;
   }
 }
