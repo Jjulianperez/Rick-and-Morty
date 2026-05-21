@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import ImgenDeRespaldo from '../../assets/cargando.png'
 import { useDeleteCharacter } from "../../hook/useCreateCharacter";
 import { useFavoritosStore } from "../../stores/favoritosStore";
 import { useToastStore } from "../../stores/toastStore";
+import { ConfirmDialog } from "../confirmDialog/ConfirmDialog";
 import type { CardProps } from "../../types/Character";
 
 export const Card = ({
@@ -20,6 +22,7 @@ export const Card = ({
   const esFavorito = isFav(id);
   const { mutate: deleteCharacter } = useDeleteCharacter();
   const { addToast } = useToastStore();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const className = `character-card ${esFavorito && "fav"} ${isCreate && "create"} ${esFavorito && isCreate && "createAndFav"} `;
 
@@ -36,17 +39,20 @@ export const Card = ({
   };
 
   const handleDelete = () => {
-    if (window.confirm(`¿Eliminar a "${name}"?`)) {
-      deleteCharacter(id, {
-        onSuccess: () => addToast("Personaje eliminado", "success"),
-        onError: () => addToast("Error al eliminar", "error"),
-      });
-    }
+    deleteCharacter(id, {
+      onSuccess: () => {
+        addToast("Personaje eliminado", "success");
+        setShowConfirm(false);
+      },
+      onError: () => addToast("Error al eliminar", "error"),
+    });
   };
 
   return (
     <article className={className}>
-      <img src={ImgCharacter ?? ImgenDeRespaldo} alt={name} />
+      <div className="character-image-wrapper">
+        <img src={ImgCharacter ?? ImgenDeRespaldo} alt={name} />
+      </div>
 
       <span onClick={handleFav} className="fav-btn">
         {esFavorito ? <AiFillHeart /> : <AiOutlineHeart />}
@@ -56,21 +62,32 @@ export const Card = ({
         <div>
           <p className="name">{name}</p>
           <span className={`status ${status}`}>{status}</span>
-          <p className="text">Visto por primera vez en {firstSeen}</p>
-          <p className="text">Visto por última vez en {lastSeen}</p>
+          {firstSeen && <p className="text">Visto por primera vez en {firstSeen}</p>}
+          {lastSeen && <p className="text">Visto por última vez en {lastSeen}</p>}
         </div>
         <footer>
-          <Link to="/characters/$id" params={{ id: String(id) }}>
+          <Link to={isCreate ? "/user-character/$id" : "/characters/$id"} params={{ id: String(id) }}>
             <button>Ver Personaje</button>
           </Link>
 
           {isCreate && (
-            <button onClick={handleDelete}>
+            <button onClick={() => setShowConfirm(true)}>
               Eliminar Personaje
             </button>
           )}
         </footer>
       </div>
+
+      <ConfirmDialog
+        open={showConfirm}
+        title="Eliminar personaje"
+        message={`¿Estás seguro de eliminar a "${name}"? Esta acción no se puede deshacer.`}
+        confirmLabel="Eliminar"
+        cancelLabel="Cancelar"
+        onConfirm={handleDelete}
+        onCancel={() => setShowConfirm(false)}
+        variant="danger"
+      />
     </article>
   );
 };
