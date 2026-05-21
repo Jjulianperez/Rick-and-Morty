@@ -106,3 +106,36 @@
     }
   }
 }
+
+@media (max-width: $bp-tablet) {
+  .filters {
+    margin: 1.5rem auto;
+    max-width: 500px;
+
+    .filters-selects select {
+      min-width: 120px;
+    }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .filters {
+    margin: 1rem auto;
+    grid-row-gap: 0.75rem;
+
+    .search input {
+      padding: 0.65rem 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .filters-selects {
+      gap: 0.6rem;
+
+      select {
+        min-width: 100%;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}

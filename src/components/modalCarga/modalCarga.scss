@@ -1,3 +1,5 @@
+@import '../../scss/variables';
+
 .modal-cargando {
   position: fixed;
   inset: 0;
@@ -31,6 +33,23 @@
   .img-cargando {
     height: 120px;
     animation: spin 2s linear infinite;
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .modal-cargando {
+    .modal-content {
+      padding: 1.5rem;
+    }
+
+    .mensaje {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .img-cargando {
+      height: 90px;
+    }
   }
 }
 

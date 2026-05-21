@@ -46,3 +46,28 @@
     }
   }
 }
+
+@media (max-width: $bp-tablet) {
+  .navbar {
+    gap: 1rem;
+    padding: 0.75rem;
+
+    a {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.7rem;
+    }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .navbar {
+    gap: 0.5rem;
+    padding: 0.5rem;
+    flex-wrap: wrap;
+
+    a {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.6rem;
+    }
+  }
+}

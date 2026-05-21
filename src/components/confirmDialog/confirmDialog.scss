@@ -110,6 +110,31 @@
   }
 }
 
+@media (max-width: $bp-mobile) {
+  .confirm-dialog-content {
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+    }
+
+    .confirm-actions {
+      flex-direction: column;
+      gap: 0.5rem;
+
+      button {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
