@@ -1,11 +1,12 @@
 .footer {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
-  padding: 1.2rem 1rem;
+  padding: 1rem;
   text-align: center;
   color: $text-color;
   font-size: 0.85rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(4px);
+  margin-top: auto;
 
   p {
     margin: 0;
@@ -23,5 +24,30 @@
 
   .emoji {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 0.85rem 0.75rem;
+    font-size: 0.78rem;
+
+    p {
+      gap: 0.3rem;
+      flex-direction: column;
+    }
+
+    .emoji { font-size: 0.85rem; }
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 0.7rem 0.5rem;
+    font-size: 0.7rem;
+
+    p {
+      gap: 0.2rem;
+    }
   }
 }
