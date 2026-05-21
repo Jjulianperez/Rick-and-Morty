@@ -41,8 +41,8 @@ function RouteComponent() {
                 name={character.name ?? ""}
                 ImgCharacter={character.image}
                 status={character.status ?? "unknown"}
-                lastSeen={character.lastSeen}
-                firstSeen={character.firstSeen}
+                lastSeen={character.lastSeen ?? ""}
+                firstSeen={character.firstSeen ?? ""}
                 isCreate={character.isCreate ?? false}
                 isFavorito={character.isFavorito ?? false}
               />
