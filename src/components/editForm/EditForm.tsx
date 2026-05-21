@@ -1,26 +1,94 @@
 import { Formik, Form, Field } from "formik";
-import { useState } from "react";
-import ImgCharacter from '../../assets/1.jpeg'
+import { useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import imgIcono from "../../assets/cargando.png";
 import "./editForm.scss";
+import type { FormCharacter, NewCharacter, ExtendedCharacter } from "../../types/Character";
+import { useUpdateCharacter } from "../../hook/useCreateCharacter";
+import { LocalStorageService } from "../../services/local/LocalStorageService";
+import { useToastStore } from "../../stores/toastStore";
 
+interface EditFormProps {
+  id: string;
+}
 
-export const EditForm = () => {
-  const [prevista, setPrevista] = useState(ImgCharacter);
+export const EditForm = ({ id }: EditFormProps) => {
+  const [prevista, setPrevista] = useState(imgIcono);
+  const [initialValues, setInitialValues] = useState<FormCharacter | null>(null);
+  const [loading, setLoading] = useState(true);
+  const mutation = useUpdateCharacter();
+  const navigate = useNavigate();
+  const { addToast } = useToastStore();
 
-  const handleImageChange = (e, setFieldValue) => {
-    const file = e.target.files[0];
+  useEffect(() => {
+    const fetchCharacter = async () => {
+      try {
+        const characters = await LocalStorageService.getCreateCharacter();
+        const character = (characters as ExtendedCharacter[]).find((c) => String(c.id) === id);
+        if (character) {
+          setInitialValues({
+            nombre: character.name || "",
+            genero: character.gender || "",
+            estado: character.status || "",
+            especie: character.species || "",
+            tipo: character.type || "",
+            origen: character.origin?.name || "",
+            imagen: character.image || imgIcono,
+          });
+          if (character.image) setPrevista(character.image);
+        }
+      } catch (err) {
+        console.error("Error al cargar personaje", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCharacter();
+  }, [id]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, setFieldValue: (field: string, value: unknown) => void) => {
+    const file = e.target.files?.[0];
     if (file) {
       setFieldValue("imagen", file);
       const reader = new FileReader();
-      reader.onloadend = () => setPrevista(reader.result);
+      reader.onloadend = () => setPrevista(reader.result as string);
       reader.readAsDataURL(file);
     }
   };
 
+  const handleSubmit = (values: FormCharacter) => {
+    const updatedCharacter: Partial<NewCharacter> = {
+      name: values.nombre,
+      gender: values.genero,
+      status: values.estado,
+      species: values.especie,
+      origin: { name: values.origen },
+      type: values.tipo,
+    };
+    if (values.imagen && values.imagen !== imgIcono) {
+      updatedCharacter.image = values.imagen;
+    }
+
+    mutation.mutate(
+      { id, data: updatedCharacter },
+      {
+        onSuccess: () => {
+          addToast("Personaje actualizado exitosamente", "success");
+          navigate({ to: "/" });
+        },
+        onError: () => {
+          addToast("Error al actualizar el personaje", "error");
+        },
+      }
+    );
+  };
+
+  if (loading) return <p style={{ textAlign: "center", padding: "2rem" }}>Cargando personaje...</p>;
+  if (!initialValues) return <p style={{ textAlign: "center", padding: "2rem" }}>Personaje no encontrado</p>;
+
   return (
     <section className="contenedor-form">
       <div className="edit-character-card">
-
         <div className="image-carga">
           <img src={prevista} alt="foto de carga" />
           <label htmlFor="file" className="btn-foto">
@@ -28,25 +96,13 @@ export const EditForm = () => {
           </label>
         </div>
 
-
         <div className="form-section">
           <h2>Editar Personaje</h2>
-          <p>Llena los campos y crea tu propio personaje</p>
+          <p>Modifica los campos y guarda los cambios</p>
 
-          <Formik
-            initialValues={{
-              nombre: "Rick Sanches",
-              genero: "Male",
-              estado: "live",
-              especie: "human",
-              tipo: "human",
-              origen: "earh",
-              imagen: ImgCharacter,
-            }}
-            onSubmit={(values) => {
-              console.log(values);
-              alert("Personaje creado con éxito");
-            }}
+          <Formik<FormCharacter>
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
           >
             {({ isSubmitting, setFieldValue }) => (
               <Form className="character-form">
@@ -98,8 +154,8 @@ export const EditForm = () => {
                   </Field>
                 </div>
 
-                <button type="submit" disabled={isSubmitting}>
-                  Editar
+                <button type="submit" disabled={isSubmitting || mutation.isPending}>
+                  {mutation.isPending ? "Guardando..." : "Guardar Cambios"}
                 </button>
               </Form>
             )}

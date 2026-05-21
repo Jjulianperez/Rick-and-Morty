@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as CreateRouteImport } from './routes/create'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UserCharacterIdRouteImport } from './routes/user-character.$id'
 import { Route as EditIdRouteImport } from './routes/edit/$id'
 import { Route as CharactersIdRouteImport } from './routes/characters.$id'
 
@@ -28,6 +29,11 @@ const CreateRoute = CreateRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserCharacterIdRoute = UserCharacterIdRouteImport.update({
+  id: '/user-character/$id',
+  path: '/user-character/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EditIdRoute = EditIdRouteImport.update({
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/favoritos': typeof FavoritosRoute
   '/characters/$id': typeof CharactersIdRoute
   '/edit/$id': typeof EditIdRoute
+  '/user-character/$id': typeof UserCharacterIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/favoritos': typeof FavoritosRoute
   '/characters/$id': typeof CharactersIdRoute
   '/edit/$id': typeof EditIdRoute
+  '/user-character/$id': typeof UserCharacterIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,12 +70,25 @@ export interface FileRoutesById {
   '/favoritos': typeof FavoritosRoute
   '/characters/$id': typeof CharactersIdRoute
   '/edit/$id': typeof EditIdRoute
+  '/user-character/$id': typeof UserCharacterIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/create' | '/favoritos' | '/characters/$id' | '/edit/$id'
+  fullPaths:
+    | '/'
+    | '/create'
+    | '/favoritos'
+    | '/characters/$id'
+    | '/edit/$id'
+    | '/user-character/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/create' | '/favoritos' | '/characters/$id' | '/edit/$id'
+  to:
+    | '/'
+    | '/create'
+    | '/favoritos'
+    | '/characters/$id'
+    | '/edit/$id'
+    | '/user-character/$id'
   id:
     | '__root__'
     | '/'
@@ -75,6 +96,7 @@ export interface FileRouteTypes {
     | '/favoritos'
     | '/characters/$id'
     | '/edit/$id'
+    | '/user-character/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -83,6 +105,7 @@ export interface RootRouteChildren {
   FavoritosRoute: typeof FavoritosRoute
   CharactersIdRoute: typeof CharactersIdRoute
   EditIdRoute: typeof EditIdRoute
+  UserCharacterIdRoute: typeof UserCharacterIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -108,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/user-character/$id': {
+      id: '/user-character/$id'
+      path: '/user-character/$id'
+      fullPath: '/user-character/$id'
+      preLoaderRoute: typeof UserCharacterIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/edit/$id': {
       id: '/edit/$id'
       path: '/edit/$id'
@@ -131,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   FavoritosRoute: FavoritosRoute,
   CharactersIdRoute: CharactersIdRoute,
   EditIdRoute: EditIdRoute,
+  UserCharacterIdRoute: UserCharacterIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

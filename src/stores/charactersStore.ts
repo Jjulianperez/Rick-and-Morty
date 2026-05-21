@@ -8,26 +8,26 @@ interface CharacterState {
   name?: string;
   status?: string;
   species?: string;
-  episode?: string;
   type?: string;
   gender?: string;
   source: "api" | "local";
+  loadedPages: number[];
   set: (state: Partial<CharacterState>) => void;
   incrementPage: () => void;
   clearCharacters: () => void;
 }
 
-const initialState: Omit<CharacterState, "set" | "setLoading" | "incrementPage" | "clearCharacters"> = {
+const initialState: Omit<CharacterState, "set" | "incrementPage" | "clearCharacters"> = {
   characters: [],
   info: {},
   page: 1,
   species: undefined,
   name: undefined,
   status: undefined,
-  episode: undefined,
   type: undefined,
   gender: undefined,
-  source: 'api'
+  source: 'api',
+  loadedPages: [],
 };
 
 export const useCharacterStore = create<CharacterState>((set, get) => ({
@@ -44,6 +44,7 @@ export const useCharacterStore = create<CharacterState>((set, get) => ({
     set({
       characters: [],
       page: 1,
+      loadedPages: [],
     });
   },
 }));

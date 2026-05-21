@@ -1,41 +1,38 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { ServerService } from "../services/server/ServerService"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { LocalStorageService } from "../services/local/LocalStorageService"
 import type { NewCharacter } from "../types/Character"
 
-export const useCreateCharacter = () =>{
-    const mutation= useMutation({
-        mutationFn:(newCharacter:NewCharacter)=> ServerService.createCharacter(newCharacter)
-    })
-    return mutation
-}
+export const useCreateCharacter = () => {
+    const queryClient = useQueryClient();
 
-export const useGetCreateCharacter = () =>{
-    return useQuery({
-        queryKey: ["created-characters"],
-        queryFn: ServerService.getCreateCharacter
-    })
-}
+    const mutation = useMutation({
+        mutationFn: (newCharacter: NewCharacter) => LocalStorageService.createCharacter(newCharacter),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["characters"] });
+        }
+    });
+    return mutation;
+};
 
 export const useDeleteCharacter = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (id: number) => ServerService.deleteCharacter(id),
+        mutationFn: (id: string) => LocalStorageService.deleteCharacter(id),
         onSuccess: () => {
-            queryClient.invalidateQueries(["created-characters"]);
+            queryClient.invalidateQueries({ queryKey: ["characters"] });
         }
     });
 };
 
+export const useUpdateCharacter = () => {
+    const queryClient = useQueryClient();
 
-
-//export const useEditCharacter = () => {
-//    const queryClient = useQueryClient();
-//
-//    return useMutation({
-//        mutationFn: ({ id, body }) => ServerService.updateCharacter(id, body),
-//        onSuccess: () => {
-//            queryClient.invalidateQueries(["created-characters"]);
-//        }
-//    });
-//}
+    return useMutation({
+        mutationFn: ({ id, data }: { id: string; data: Partial<NewCharacter> }) =>
+            LocalStorageService.updateCharacter(id, data),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["characters"] });
+        }
+    });
+};

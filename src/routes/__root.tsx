@@ -2,6 +2,8 @@ import { createRootRoute, Outlet, Link, useRouterState } from "@tanstack/react-r
 import { useEffect, useState } from "react";
 import ImgTitulo from "../assets/tituloRickAndMorty.png";
 import ImgIcono from "../assets/Icono.png";
+import { ToastContainer } from "../components/toast/Toast";
+import { ScrollToTop } from "../components/scrollToTop/ScrollToTop";
 import "../scss/main.scss";
 
 const RootRouteComponent = () => {
@@ -9,13 +11,14 @@ const RootRouteComponent = () => {
   const [backgroundBody, setBackgroundBody] = useState("body-index");
 
 useEffect(() => {
+  const path = location.pathname;
 
-  if (location.pathname === "/") setBackgroundBody("body-index");
-  else if (location.pathname === "/favoritos") setBackgroundBody("body-favoritos");
-  else if (location.pathname === "/create") setBackgroundBody("body-create");
-  else if (location.pathname == "/characters/1") setBackgroundBody("body-character");
-  else if (location.pathname == "/edit$id") setBackgroundBody("body-edit");
-  
+  if (path === "/") setBackgroundBody("body-index");
+  else if (path === "/favoritos") setBackgroundBody("body-favoritos");
+  else if (path === "/create") setBackgroundBody("body-create");
+   else if (path.startsWith("/characters/")) setBackgroundBody("body-character");
+   else if (path.startsWith("/user-character/")) setBackgroundBody("body-user-character");
+   else if (path.startsWith("/edit/")) setBackgroundBody("body-edit");
 }, [location.pathname]);
 
   return (
@@ -45,6 +48,9 @@ useEffect(() => {
           <span className="emoji">🚀</span> Pasante en Bewise 
         </p> 
       </footer>
+
+      <ToastContainer />
+      <ScrollToTop />
     </section>
   );
 };

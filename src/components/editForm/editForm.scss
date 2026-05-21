@@ -98,6 +98,13 @@
         }
       }
 
+      .error {
+        color: #ff6b6b;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+        display: block;
+      }
+
       button {
         width: 30%;
         margin-top: 1rem;
@@ -112,6 +119,11 @@
 
         &:hover {
           background: #00cc70;
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
         }
       }
     }

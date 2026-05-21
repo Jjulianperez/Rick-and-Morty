@@ -6,7 +6,6 @@ interface SingleCharacterState {
   loading: boolean;
   set: (state: Partial<SingleCharacterState>) => void;
   setLoading: (value: boolean) => void;
-  clearCharacters: () => void;
 }
 
 export const useSingleCharacterStore = create<SingleCharacterState>((set) => ({
@@ -14,5 +13,4 @@ export const useSingleCharacterStore = create<SingleCharacterState>((set) => ({
   loading: false,
   set: (newState) => set(newState),
   setLoading: (value) => set({ loading: value }),
-  clearCharacters: () => set({ character: undefined }),
 }));

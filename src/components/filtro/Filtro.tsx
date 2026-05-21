@@ -4,7 +4,7 @@ import { useCharacterStore } from '../../stores/charactersStore'
 export const Filtro = () => {
   const { status, species, name, type, gender, source, set, clearCharacters } = useCharacterStore()
 
-  const applyFilter = (key, value) => {
+  const applyFilter = (key: string, value: string) => {
     clearCharacters();
 
     if (value === "" || value === "default") {
@@ -15,12 +15,12 @@ export const Filtro = () => {
     set({ [key]: value, page: 1 });
   };
 
-  const handleSource = (value) => {
+  const handleSource = (value: string) => {
     clearCharacters();
-    set({ source: value, page: 1 });
+    set({ source: value as "api" | "local", page: 1 });
   };
 
-  const handleSearch = (value) => {
+  const handleSearch = (value: string) => {
     clearCharacters();
     set({ name: value, page: 1 });
   };
