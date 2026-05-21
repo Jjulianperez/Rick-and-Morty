@@ -7,6 +7,7 @@ import { useFetchEpisodes } from "../../hook/useFechEpisode";
 import { useDeleteCharacter } from "../../hook/useCreateCharacter";
 import { useNavigate } from "@tanstack/react-router";
 import { useToastStore } from "../../stores/toastStore";
+import { ConfirmDialog } from "../confirmDialog/ConfirmDialog";
 
 interface CharacterDetailProps {
   character?: ExtendedCharacter;
@@ -16,6 +17,7 @@ export const CharacterDetail: React.FC<CharacterDetailProps> = ({ character }) =
   const [activeTab, setActiveTab] = useState("detalles");
   const [isFav, setIsFav] = useState(character?.isFavorito);
   const [episodePage, setEpisodePage] = useState(0);
+  const [showConfirm, setShowConfirm] = useState(false);
   const episodeUrls = (character?.episode as string[] | undefined) ?? [];
   const { episodes, isLoading } = useFetchEpisodes(episodeUrls);
   const { mutate: deleteCharacter } = useDeleteCharacter();
@@ -64,17 +66,7 @@ export const CharacterDetail: React.FC<CharacterDetailProps> = ({ character }) =
           <Link to="/edit/$id" params={{ id: String(character.id) }}>
             <button className="btn-edit">Editar</button>
           </Link>
-          <button className="btn-delete" onClick={() => {
-            if (window.confirm(`¿Eliminar a "${character.name}"?`)) {
-              deleteCharacter(String(character.id), {
-                onSuccess: () => {
-                  addToast("Personaje eliminado", "success");
-                  navigate({ to: "/" });
-                },
-                onError: () => addToast("Error al eliminar", "error"),
-              });
-            }
-          }}>
+          <button className="btn-delete" onClick={() => setShowConfirm(true)}>
             Eliminar personaje
           </button>
         </div>
@@ -213,6 +205,25 @@ export const CharacterDetail: React.FC<CharacterDetailProps> = ({ character }) =
           )}
         </div>
       </section>
+
+      <ConfirmDialog
+        open={showConfirm}
+        title="Eliminar personaje"
+        message={`¿Estás seguro de eliminar a "${character.name}"? Esta acción no se puede deshacer.`}
+        confirmLabel="Eliminar"
+        cancelLabel="Cancelar"
+        onConfirm={() => {
+          deleteCharacter(String(character.id), {
+            onSuccess: () => {
+              addToast("Personaje eliminado", "success");
+              navigate({ to: "/" });
+            },
+            onError: () => addToast("Error al eliminar", "error"),
+          });
+        }}
+        onCancel={() => setShowConfirm(false)}
+        variant="danger"
+      />
     </div>
   );
 };
