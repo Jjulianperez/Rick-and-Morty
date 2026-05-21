@@ -85,7 +85,9 @@ section[id="character"] {
   min-height: 100vh;
 
   main {
-    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
   }
 }
 
