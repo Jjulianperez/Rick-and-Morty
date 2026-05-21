@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $primary-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $secondary-color;
+  border-radius: 4px;
+
+  &:hover {
+    background: lighten($secondary-color, 10%);
+  }
+}
+
+.body-index,
+.body-favoritos,
+.body-create,
+.body-character,
+.body-character-create,
+.body-user-character,
+.body-edit {
+  font-family: $font-primary;
+  background-attachment: fixed;
+  color: $text-color;
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+.body-index {
+  background-image: linear-gradient(135deg, $primary-color, darken($secondary-color, 10%), $secondary-color);
+
+  main { animation: fadeIn 0.5s ease; }
+}
+
+.body-favoritos {
+  background-image: linear-gradient(135deg, #002C4E, #006644, #00A466);
+
+  main { animation: fadeIn 0.5s ease; }
+}
+
+.body-create {
+  background-image: linear-gradient(135deg, #002C4E, #aa0000, #ff0000);
+
+  main { animation: fadeInUp 0.5s ease; }
+}
+
+.body-character {
+  background-image: linear-gradient(135deg, #0d0221, #1a0a5e, #3a0ca3);
+
+  main { animation: fadeIn 0.5s ease; }
+}
+
+.body-character-create {
+  background-image: linear-gradient(135deg, #000000, #7a0000, #c60000);
+}
+
+.body-user-character {
+  background-image: linear-gradient(135deg, #1a0000, #2a0000, #3d0000);
+
+  main { animation: fadeIn 0.5s ease; }
+}
+
+.body-edit {
+  background-image: linear-gradient(135deg, #000000, #080060, #1000c6);
+
+  main { animation: fadeInUp 0.5s ease; }
+}
+
+section[id="character"] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+  }
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
+  align-items: center;
+
+  .portalIcono img {
+    max-width: 150px;
+    height: auto;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .tituloPrincipal {
+    display: flex;
+    justify-content: center;
+  }
+
+  .tituloPrincipal img {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 1rem;
+    animation: fadeInDown 0.8s ease;
+  }
+}
+
+

@@ -1,69 +1,52 @@
-# React + TypeScript + Vite
+# Rick and Morty App 🛸
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Explorador interactivo de personajes de **Rick and Morty** construido con **React 19**, **TypeScript** y **Vite**.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔍 **Búsqueda y filtros** — Filtra por nombre, especie, estado, género y tipo
+- ♾️ **Scroll infinito** — Navegación continua por todos los personajes de la API
+- ⭐ **Favoritos** — Guarda personajes favoritos con persistencia en localStorage
+- ➕ **Crear personajes** — Crea tus propios personajes con formulario validado
+- ✏️ **Editar y eliminar** — Modifica o borra personajes creados
+- 📋 **Detalle completo** — Información detallada con episodios paginados
+- 🎨 **Animaciones** — Transiciones suaves, hover effects, carga escalonada
+- 📱 **Responsive** — Adaptado a desktop, tablet y móvil
 
-## Expanding the ESLint configuration
+## 🛠️ Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Tecnología | Uso |
+|---|---|
+| React 19 + TypeScript | UI y tipado |
+| Vite 7 + SWC | Build ultrarrápido |
+| TanStack Router | Enrutamiento file-based |
+| TanStack Query | Fetching y caché |
+| Zustand | Estado global |
+| Formik + Yup | Formularios y validación |
+| Axios | Cliente HTTP |
+| Sass | Estilos con animaciones |
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Deploy
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+El proyecto está listo para deploy en **Vercel**. Los personajes creados se guardan en localStorage del navegador (no requiere backend).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+## 🧑‍💻 Desarrollo local
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🏗️ Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
+
+## 📁 API
+
+- **Personajes reales**: [Rick and Morty API](https://rickandmortyapi.com/)
+- **Personajes creados**: localStorage del navegador
