@@ -11,6 +11,20 @@
   pointer-events: none;
 }
 
+@media (max-width: $bp-mobile) {
+  .toast-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .toast {
+    max-width: 100%;
+    font-size: 0.8rem;
+    padding: 12px 14px;
+  }
+}
+
 .toast {
   display: flex;
   align-items: center;

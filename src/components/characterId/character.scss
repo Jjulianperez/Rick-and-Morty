@@ -412,13 +412,49 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $bp-mobile) {
   .character-detail-div {
     padding: 0.8rem;
+    gap: 1rem;
+  }
+
+  .character-header {
+    gap: 1rem;
+
+    .character-image {
+      max-width: 200px;
+    }
+
+    .character-info {
+      padding: 1rem;
+      gap: 0.5rem;
+
+      p {
+        font-size: 0.9rem;
+        margin: 0.3rem;
+      }
+    }
   }
 
   .character-details {
     padding: 1rem !important;
+    gap: 1rem !important;
+
+    .character-tabs {
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      button {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.6rem;
+        flex: 1;
+        min-width: 80px;
+      }
+    }
+
+    .character-content {
+      font-size: 0.85rem;
+    }
   }
 
   .episodes-list {
